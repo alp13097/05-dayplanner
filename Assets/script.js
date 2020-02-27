@@ -10,17 +10,19 @@ setInterval(() => {
     time.textContent = humanReadable;    
 }, 1000)
 
-var hour = document.getElementsByTagName("span");
-var textBox = document.getElementsByTagName("textarea");
 
-if (hour > moment.format('h a')) {
-    textBox.classList.add("past")
-} else if (hour === moment.format('h a')) {
-    textBox.classList.add("present")
-} else {
-    textBox.classList.add("future")
-}
-
-
-
-
+timeUpdate ();
+    function timeUpdate(now) {
+    var beginningTime = moment("9:00:00 am", "h:mm:ss a");
+    var endingTime = moment("5:00:00 pm", "h:mm:ss a");
+    if (moment(beginningTime).isBefore(now)){
+        $("textarea").addClass("past");
+    }
+  
+    else if (moment(endingTime).isAfter(now)){
+        $("textarea").addClass("future");
+    }
+    else {
+        $("textarea").addClass("present");
+    }
+    }
