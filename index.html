@@ -142,8 +142,49 @@
         </div>
     </div>
 
-    <script src="Assets/./script.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+
+    <!-- javascript -->
+    <script type="text/javascript">
+        const time = document.getElementById("currentDay");
+        setInterval(() => {
+          const now = moment();
+          const humanReadable = now.format('MMMM Do YYYY, h:mm:ss a');
+          time.textContent = humanReadable;
+        }, 1000)
+        timeUpdate ();
+        function timeUpdate(now) {
+        var beginningTime = moment("9:00:00 am", "h:mm:ss a");
+        var endingTime = moment("5:00:00 pm", "h:mm:ss a");
+        if (moment(beginningTime).isBefore(now)){
+            $("textarea").addClass("past");
+        }
+      
+        else if (moment(endingTime).isAfter(now)){
+            $("textarea").addClass("future");
+        }
+        else {
+            $("textarea").addClass("present");
+        }
+        }
+        
+        $("button").on('click', function (event) {
+            event.preventDefault();
+            var scheduleValue = $("textarea").val();
+            localStorage.setItem("scheduleValue", scheduleValue);
+            // localStorage.getItem("scheduleValue");
+            // $("textarea").text("scheduleValue");
+            sessionStorage.setItem('scheduleValue', scheduleValue);
+            var sesh = sessionStorage.getItem('scheduleValue');
+            // scheduleValue.get();
+            // Save data to sessionStorage
+            // console.log(sessionStorage.getItem("scheduleValue"));
+            // Get saved data from sessionStorage
+            // let data = sessionStorage.getItem('scheduleValue');
+        });
+          
+        </script>
+
   </body>
 </html>
